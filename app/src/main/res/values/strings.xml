@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Hospitalize</string>
+    <string-array name="provinsi">
+        <item>Jawa Timur</item>
+        <item>Jawa Tengah</item>
+        <item>Jawa Barat</item>
+        <item>Jogja</item>
+    </string-array>
+    <string-array name="kota">
+        <item>Surabaya</item>
+        <item>Semarang</item>
+        <item>Bandung</item>
+        <item>Jogja</item>
+    </string-array>
+</resources>

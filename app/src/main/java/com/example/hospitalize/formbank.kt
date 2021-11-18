@@ -12,7 +12,14 @@ class formbank : AppCompatActivity() {
 
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
-            val intent = Intent(this, rsbank::class.java)
+            finish()
+//            val intent = Intent(this, rsbank::class.java)
+//            startActivity(intent)
+        }
+
+        val maps = findViewById<ImageButton>(R.id.map)
+        maps.setOnClickListener {
+            val intent = Intent(this, map::class.java)
             startActivity(intent)
         }
     }

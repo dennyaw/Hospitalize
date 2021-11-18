@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_formbank.xml" value="0.1765625" />
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_formdonor.xml" value="0.1765625" />
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_lokasibank.xml" value="0.18385416666666668" />
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_lokasidonor.xml" value="0.18385416666666668" />
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_main.xml" value="0.18385416666666668" />
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_map.xml" value="0.18385416666666668" />
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_rsbank.xml" value="0.18385416666666668" />
+        <entry key="..\:/Kuliah/PemobPrak/Hospitalize/app/src/main/res/layout/activity_rsdonor.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hospitalize/app/src/main/res/drawable/boxabu.xml" value="0.215625" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hospitalize/app/src/main/res/drawable/boxmerah.xml" value="0.215625" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hospitalize/app/src/main/res/drawable/boxputih.xml" value="0.215625" />

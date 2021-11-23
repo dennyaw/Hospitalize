@@ -13,8 +13,9 @@ class lokasidonor : AppCompatActivity() {
 
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
 
         val cari = findViewById<ImageButton>(R.id.cari)

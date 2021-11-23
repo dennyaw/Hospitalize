@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    tools:context=".goldar_list">
+
+    <ImageButton
+        android:id="@+id/goldar_card"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/boxabu"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/goldar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:text="Golongan Darah A"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/goldar_card"
+        app:layout_constraintStart_toStartOf="@+id/goldar_card"
+        app:layout_constraintTop_toTopOf="@+id/goldar_card"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <TextView
+        android:id="@+id/goldar_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tersedia 3 kantong"
+        app:layout_constraintBottom_toBottomOf="@+id/goldar_card"
+        app:layout_constraintStart_toStartOf="@+id/goldar_title"
+        app:layout_constraintTop_toBottomOf="@+id/goldar_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/goldar_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="-4dp"
+        android:background="@drawable/boxmerah"
+        android:gravity="center"
+        android:text="A"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/goldar_card"
+        app:layout_constraintEnd_toEndOf="@+id/goldar_card"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/goldar_card"
+        app:layout_constraintTop_toTopOf="@+id/goldar_card"
+        app:layout_constraintVertical_bias="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

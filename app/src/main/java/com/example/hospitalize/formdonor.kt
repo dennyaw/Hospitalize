@@ -12,8 +12,9 @@ class formdonor : AppCompatActivity() {
 
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
-            val intent = Intent(this, rsdonor::class.java)
-            startActivity(intent)
+            finish()
+//            val intent = Intent(this, rsdonor::class.java)
+//            startActivity(intent)
         }
 
     }

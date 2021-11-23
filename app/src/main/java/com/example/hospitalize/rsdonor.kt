@@ -12,8 +12,9 @@ class rsdonor : AppCompatActivity() {
 
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
-            val intent = Intent(this, lokasidonor::class.java)
-            startActivity(intent)
+            finish()
+//            val intent = Intent(this, lokasidonor::class.java)
+//            startActivity(intent)
         }
 
         val rs1 = findViewById<ImageButton>(R.id.rs1)

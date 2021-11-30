@@ -3,9 +3,9 @@ package com.example.hospitalize
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class goldar_list : AppCompatActivity() {
+class rs_list : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.goldar_list)
+        setContentView(R.layout.rs_list)
     }
 }

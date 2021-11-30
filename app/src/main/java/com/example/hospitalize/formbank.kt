@@ -3,10 +3,8 @@ package com.example.hospitalize
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.content.DialogInterface
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
+
 //import kotlinx.android.synthetic.main.activity_main.*
 
 class formbank : AppCompatActivity() {
@@ -27,7 +25,7 @@ class formbank : AppCompatActivity() {
             index++
         }
         //creating custom ArrayAdapter
-        val myListAdapter = goldarlist_adapter(this,empGoldar,empGoldarStok)
+        val myListAdapter = goldar_list_adapter(this,empGoldar,empGoldarStok)
 
         val listView = findViewById<ListView>(R.id.goldar_listview)
         listView.adapter = myListAdapter
@@ -36,8 +34,6 @@ class formbank : AppCompatActivity() {
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
             finish()
-//            val intent = Intent(this, rsbank::class.java)
-//            startActivity(intent)
         }
 
         val maps = findViewById<ImageButton>(R.id.map)

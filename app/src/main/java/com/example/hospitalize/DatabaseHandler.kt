@@ -12,6 +12,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     companion object {
         private val DATABASE_VERSION = 1
         private val DATABASE_NAME = "GoldarDatabase"
+
         private val TABLE_RUMAH_SAKIT = "RumahSakitTable"
         private val KEY_RUMAH_SAKIT_ID = "rumah_sakit_id"
         private val KEY_RUMAH_SAKIT = "rumah_sakit"
@@ -19,7 +20,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         private val KEY_SUMBU_X = "sumbu_x"
         private val KEY_SUMBU_Y = "sumbu_y"
         private val KEY_ALAMAT = "alamat"
-//        private val KEY_TELEPON = "telepon"
+        private val KEY_TELEPON = "telepon"
 
         private val TABLE_GOLDAR = "GoldarTable"
         private val KEY_GOLDAR_ID = "goldar_id"
@@ -29,18 +30,21 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        //creating table with fields
+
+        // creating table with fields
         val CREATE_RUMAH_SAKIT_TABLE = ("CREATE TABLE " + TABLE_RUMAH_SAKIT + "("
                 + KEY_RUMAH_SAKIT_ID + " INTEGER PRIMARY KEY," + KEY_RUMAH_SAKIT + " TEXT," + KEY_REGION + " TEXT," + KEY_SUMBU_X + " TEXT,"
-                + KEY_SUMBU_Y + " TEXT," + KEY_ALAMAT + " TEXT)")
+                + KEY_SUMBU_Y + " TEXT,"+ KEY_TELEPON + " TEXT," + KEY_ALAMAT + " TEXT)")
         db?.execSQL(CREATE_RUMAH_SAKIT_TABLE)
         db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
-                + KEY_SUMBU_Y + "," + KEY_ALAMAT + ") " +
-                "values(1,'RSUD Bhakti Dharma Husada', 'Surabaya', '-7.254849380414793', '112.6357612344045', 'Jl. Kendung No.115 - 117, Sememi, Kec. Benowo, Kota SBY, Jawa Timur 60198')");
+                + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
+                "values(1,'RSUD Bhakti Dharma Husada', 'Surabaya', '-7.254849380414793', '112.6357612344045', '123', 'Jl. Kendung No.115 - 117, Sememi, Kec. Benowo, Kota SBY, Jawa Timur 60198')");
         db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
-                + KEY_SUMBU_Y + "," + KEY_ALAMAT + ") " +
-                "values(2,'Rumah Sakit Bunda', 'Surabaya', '-7.251145620793517', '112.65026662144396', 'Jl. Raya Kandangan No.23-24, Kandangan, Kec. Benowo, Kota SBY, Jawa Timur 60199')");
+                + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
+                "values(2,'Rumah Sakit Bunda', 'Surabaya', '-7.251145620793517', '112.65026662144396', '345', 'Jl. Raya Kandangan No.23-24, Kandangan, Kec. Benowo, Kota SBY, Jawa Timur 60199')");
+        db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
+                + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
+                "values(3,'Rumah Sakit Panti Rapih', 'Yogyakarta', '-7.776140207372767', '110.37688875767313', '345', 'Jl. Cik Di Tiro No.30, Samirono, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223')");
 
 
         val CREATE_GOLDAR_TABLE = ("CREATE TABLE " + TABLE_GOLDAR + "("
@@ -57,10 +61,13 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
                 "values(4, 1, 'O', 18)");
         db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
                 "values(5, 2, 'A', 4)");
+        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
+                "values(6, 3, 'AB', 9)");
+        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
+                "values(7, 3, 'O', 18)");
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_RUMAH_SAKIT)
         db!!.execSQL("DROP TABLE IF EXISTS " + TABLE_GOLDAR)
         onCreate(db)
@@ -94,9 +101,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         }
         return empList
     }
-    fun viewRumahSakit(region: String): List<RumahSakitModelClass> {
+    fun viewRS(region: String): List<RumahSakitModelClass> {
         val empList: ArrayList<RumahSakitModelClass> = ArrayList<RumahSakitModelClass>()
-        val selectQuery = "SELECT * FROM $TABLE_RUMAH_SAKIT WHERE region = $region "
+        val selectQuery = "SELECT * FROM $TABLE_RUMAH_SAKIT WHERE region = '$region' "
         val db = this.readableDatabase
         var cursor: Cursor? = null
         try {

@@ -12,13 +12,13 @@ class MainActivity : AppCompatActivity() {
 
         val donor = findViewById<ImageButton>(R.id.donordarah)
         donor.setOnClickListener {
-            val intent = Intent(this, lokasidonor::class.java)
+            val intent = Intent(this, donor_location::class.java)
             startActivity(intent)
         }
 
         val bank = findViewById<ImageButton>(R.id.bankdarah)
         bank.setOnClickListener {
-            val intent = Intent(this, lokasibank::class.java)
+            val intent = Intent(this, bank_location::class.java)
             startActivity(intent)
         }
 

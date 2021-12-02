@@ -22,25 +22,25 @@
             android:value="@string/map_key" />
 
         <activity
-            android:name=".formbank"
+            android:name=".bank_detail"
             android:exported="true" />
         <activity
-            android:name=".formdonor"
+            android:name=".donor_form"
             android:exported="true" />
         <activity
-            android:name=".rsbank"
+            android:name=".bank_rs"
             android:exported="true" />
         <activity
-            android:name=".rsdonor"
+            android:name=".donor_rs"
             android:exported="true" />
         <activity
-            android:name=".lokasibank"
+            android:name=".bank_location"
             android:exported="true" />
         <activity
-            android:name=".lokasidonor"
+            android:name=".donor_location"
             android:exported="true" />
         <activity
-            android:name=".map"
+            android:name=".bank_map"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

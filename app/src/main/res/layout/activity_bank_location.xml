@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".lokasidonor">
+    tools:context=".bank_location">
 
     <ImageView
         android:id="@+id/gbr"
@@ -44,12 +44,12 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/DonorDarah"
+        android:id="@+id/BankDarah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:text="Donor Darah"
+        android:text="Bank Darah"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"

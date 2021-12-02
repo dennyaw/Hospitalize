@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 
-class lokasidonor : AppCompatActivity() {
-
+class bank_location : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lokasidonor)
+        setContentView(R.layout.activity_bank_location)
 
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
@@ -20,7 +19,7 @@ class lokasidonor : AppCompatActivity() {
 
         val cari = findViewById<ImageButton>(R.id.cari)
         cari.setOnClickListener {
-            val intent = Intent(this, rsdonor::class.java)
+            val intent = Intent(this, bank_rs::class.java)
             startActivity(intent)
         }
     }

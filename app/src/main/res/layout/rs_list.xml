@@ -5,16 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageButton
+<!--    <ImageButton-->
+<!--        android:id="@+id/rs"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="105dp"-->
+<!--        android:background="@null"-->
+<!--        android:clickable="true"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/boxabu"-->
+<!--        tools:ignore="SpeakableTextPresentCheck"-->
+<!--        android:focusable="true" />-->
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/rs"
         android:layout_width="match_parent"
         android:layout_height="105dp"
-        android:background="@null"
+        android:backgroundTint="@color/abu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/boxabu"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +40,15 @@
         app:layout_constraintStart_toStartOf="@+id/rs"
         app:layout_constraintTop_toTopOf="@+id/rs"
         android:orientation="vertical"
+        android:elevation="2dp"
         >
+        <TextView
+            android:id="@+id/rs_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="ID"/>
+
         <TextView
             android:id="@+id/rs_name"
             android:layout_width="wrap_content"

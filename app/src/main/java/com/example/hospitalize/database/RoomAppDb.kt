@@ -16,6 +16,7 @@ abstract class RoomAppDb: RoomDatabase() {
 
         @JvmStatic
         fun getAppDatabase(context: Context): RoomAppDb? {
+        Log.d("CREATION", "Database executed")
 
             if(INSTANCE == null) {
                 Log.d("CREATION", "Database executed")

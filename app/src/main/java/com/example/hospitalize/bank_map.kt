@@ -14,11 +14,15 @@ class bank_map : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bank_map)
 
+        val extras = intent.extras
+        var rsX = extras?.getString("x")
+        var rsY = extras?.getString("y")
+
         mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(OnMapReadyCallback {
             googleMap = it
 
-            var location1 = LatLng(-7.6626370694481, 109.60926814706741)
+            var location1 = LatLng(rsX!!.toDouble(), rsY!!.toDouble())
             googleMap.addMarker(MarkerOptions().position(location1).title("Rumah Sakit"))
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location1,15f))
         })

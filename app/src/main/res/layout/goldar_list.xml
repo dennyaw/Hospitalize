@@ -4,24 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".goldar_list">
+    tools:context=".listview.goldar_list">
 
     <TextView
         android:id="@+id/goldar_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:elevation="20dp"
         android:visibility="gone"
         android:text="ID"/>
 
-    <ImageButton
+    <TextView
+        android:id="@+id/goldar_stok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="0"/>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/goldar_card"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:background="@null"
+        android:backgroundTint="@color/abu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/boxabu"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView

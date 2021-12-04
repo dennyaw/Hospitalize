@@ -3,9 +3,14 @@ package com.example.hospitalize
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import com.example.hospitalize.adapter.GoldarListAdapter
+import com.example.hospitalize.database.DatabaseHandler
+import com.example.hospitalize.model.GoldarModel
+import com.example.hospitalize.model.RumahSakitModelClass
+
 
 //import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,32 +26,17 @@ class bank_detail : AppCompatActivity() {
 
         val rs_id: String?
         val extras = intent.extras
-//        if (extras != null) {
         rs_id = extras?.getString("key")
         Log.d("CREATION", rs_id!!)
 
-        //The key argument here must match that used in the other activity
-//        }
-
         //creating the instance of DatabaseHandler class
-        val databaseHandler: DatabaseHandler= DatabaseHandler(this)
+        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<GoldarModelClass> = databaseHandler.viewGoldar(rs_id.toInt())
+        val emp: List<GoldarModel> = databaseHandler.viewGoldar(rs_id.toInt())
         val empRs: List<RumahSakitModelClass> = databaseHandler.viewRSDetail(rs_id)
-//        val empGoldar = Array<String>(emp.size){"15"}
-//        val empGoldarStok = Array<String>(emp.size){"null"}
-//        var index = 0
-//        for(e in emp){
-//            empGoldar[index] = e.goldar
-//            empGoldarStok[index] = e.goldarStok.toString()
-//            index++
-//        }
 
-        var list = mutableListOf<GoldarModel>()
 
-        for(e in emp){
-            list.add(GoldarModel(e.sumberId.toString(), e.goldar, e.goldarStok.toString()))
-        }
+        // INFO RS
         var RsName = "x"
         var RsAddress = "x"
         var RsPhone = "x"
@@ -65,14 +55,32 @@ class bank_detail : AppCompatActivity() {
         findViewById<TextView>(R.id.notelp).text = RsPhone
         findViewById<TextView>(R.id.alamat).text = RsAddress
 
-        listView.adapter = GoldarListAdapter(this,R.layout.goldar_list,list)
 
-        //creating custom ArrayAdapter
-//        val myListAdapter = goldar_list_adapter(this,empGoldar,empGoldarStok)
+        listView.adapter = GoldarListAdapter(this,R.layout.goldar_list,emp)
 
-//        val listView = findViewById<ListView>(R.id.goldar_listview)
-//        listView.adapter = myListAdapter
+        listView.setOnItemClickListener{parent, view, position, id ->
+            val idText = view.findViewById(R.id.goldar_id) as TextView
+            val goldar_id = idText.text.toString()
+            val stokText = view.findViewById(R.id.goldar_stok) as TextView
+            val goldar_stok = stokText.text.toString()
 
+            Log.d("CREATION", "pencet bloodbag")
+
+            // Membuat komponen alert
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Ambil kantung darah")
+            builder.setMessage("Apakah kamu yakin ingin mengambil kantung darah?")
+
+            builder.setPositiveButton("YES") { dialog, which ->
+                databaseHandler.updateGoldar(goldar_id, goldar_stok)
+                Toast.makeText(getApplicationContext(), "Sukses mengambil kantung darah", Toast.LENGTH_LONG).show();
+            }
+
+            builder.setNegativeButton("NO") { dialog, which -> }
+
+            builder.show()
+
+        }
 
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {

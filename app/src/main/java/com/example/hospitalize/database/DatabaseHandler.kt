@@ -1,14 +1,21 @@
-package com.example.hospitalize
+package com.example.hospitalize.database
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.Cursor
 import android.database.sqlite.SQLiteException
+import android.util.Log
+import com.example.hospitalize.model.GoldarModel
+import com.example.hospitalize.model.RumahSakitModelClass
 
 
 //creating the database logic, extending the SQLiteOpenHelper base class
-class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,DATABASE_VERSION) {
+class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
+    DATABASE_NAME,null,
+    DATABASE_VERSION
+) {
     companion object {
         private val DATABASE_VERSION = 3
         private val DATABASE_NAME = "GoldarDatabase"
@@ -74,8 +81,8 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
     }
 
     //method to read data
-    fun viewGoldar(id: Int): List<GoldarModelClass> {
-        val empList: ArrayList<GoldarModelClass> = ArrayList<GoldarModelClass>()
+    fun viewGoldar(id: Int): List<GoldarModel> {
+        val empList: ArrayList<GoldarModel> = ArrayList<GoldarModel>()
         val selectQuery = "SELECT * FROM $TABLE_GOLDAR WHERE sumber_id = $id"
         val db = this.readableDatabase
         var cursor: Cursor? = null
@@ -85,15 +92,15 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
             db.execSQL(selectQuery)
             return ArrayList()
         }
-        var sumberId: Int
+        var goldarId: Int
         var goldar: String
         var goldarStok: Int
         if (cursor.moveToFirst()) {
             do {
-                sumberId = cursor.getInt(cursor.getColumnIndexOrThrow("sumber_id"))
+                goldarId = cursor.getInt(cursor.getColumnIndexOrThrow("goldar_id"))
                 goldar = cursor.getString(cursor.getColumnIndexOrThrow("goldar"))
                 goldarStok = cursor.getInt(cursor.getColumnIndexOrThrow("stok"))
-                val emp = GoldarModelClass(sumberId = sumberId, goldar = goldar, goldarStok = goldarStok)
+                val emp = GoldarModel(id = goldarId.toString(), goldar = goldar, stok = goldarStok.toString())
 //                if (sumberId == id) {
                     empList.add(emp)
 //                }
@@ -101,6 +108,36 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,DATABASE_NAME,
         }
         return empList
     }
+
+    @SuppressLint("Recycle")
+    fun updateGoldar(id: String, stok:String): Int {
+        val db = this.writableDatabase
+
+        val updateQuery = "UPDATE $TABLE_GOLDAR SET $KEY_GOLDAR_STOK = " + (stok.toInt() - 1 ) +" WHERE $KEY_GOLDAR_ID = $id ;"
+//        try {
+//            db.rawQuery(updateQuery, null)
+//        } catch (e: SQLiteException) {
+//            db.execSQL(updateQuery)
+//        }
+        val cursor = db.rawQuery(
+            updateQuery,
+            null
+        )
+        var sum = 0
+        if (cursor != null) {
+            try {
+                if (cursor.moveToFirst()) {
+                    sum = cursor.getInt(0)
+                }
+            } finally {
+                cursor.close()
+            }
+        }
+//        db.close()
+        Log.d("CREATION", "Update Query")
+        return 1
+    }
+
     fun viewRS(region: String): List<RumahSakitModelClass> {
         val empList: ArrayList<RumahSakitModelClass> = ArrayList<RumahSakitModelClass>()
         val selectQuery = "SELECT * FROM $TABLE_RUMAH_SAKIT WHERE region = '$region' "

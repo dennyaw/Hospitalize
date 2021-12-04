@@ -1,4 +1,4 @@
-package com.example.hospitalize
+package com.example.hospitalize.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.example.hospitalize.R
+import com.example.hospitalize.model.RumahSakitModelClass
 
-class RsListAdapter(var mCtx:Context , var resource:Int,var items:List<RsModel>)
-    :ArrayAdapter<RsModel>( mCtx , resource , items ) {
+class RsListAdapter(var mCtx:Context , var resource:Int,var items:List<RumahSakitModelClass>)
+    :ArrayAdapter<RumahSakitModelClass>( mCtx , resource , items ) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -20,11 +22,11 @@ class RsListAdapter(var mCtx:Context , var resource:Int,var items:List<RsModel>)
         var address: TextView = view.findViewById(R.id.rs_alamat)
 
 
-        var person: RsModel = items[position]
+        var person: RumahSakitModelClass = items[position]
 
-        idText.text = person.id
-        name.text = person.name
-        address.text = person.address
+        idText.text = person.rumahSakitId.toString()
+        name.text = person.rumahSakit
+        address.text = person.alamat
 
 
         return view

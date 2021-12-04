@@ -5,17 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import com.example.hospitalize.adapter.RsViewAdapter
-import com.example.hospitalize.database.RsEntity
-import com.example.hospitalize.view_model.RsViewModel
-
 import android.widget.TextView
+import com.example.hospitalize.adapter.RsListAdapter
+import com.example.hospitalize.database.DatabaseHandler
+import com.example.hospitalize.model.RumahSakitModelClass
 
 
-class bank_rs : AppCompatActivity(), RsViewAdapter.RowClickListener {
+class bank_rs : AppCompatActivity() {
 
-    lateinit var recyclerViewAdapter: RsViewAdapter
-    lateinit var viewModel: RsViewModel
     private lateinit var listView : ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,46 +20,20 @@ class bank_rs : AppCompatActivity(), RsViewAdapter.RowClickListener {
         setContentView(R.layout.activity_bank_rs)
 
         listView = findViewById(R.id.rs_listview)
+        val rs_kota: String?
+        val rs_provinsi: String?
+        val extras = intent.extras
+        rs_kota = extras?.getString("key")
+        rs_provinsi = extras?.getString("province")
 
-//        val rs_recyclerView: RecyclerView = findViewById<RecyclerView>(R.id.rs_recyclerView)
-//        rs_recyclerView.apply {
-//            Log.d("CREATION", "RecyclerView executed")
-//            layoutManager = LinearLayoutManager(this@bank_rs)
-//            recyclerViewAdapter = RsViewAdapter(this@bank_rs)
-//            adapter = RsViewAdapter(this@bank_rs)
-////            val divider = DividerItemDecoration(applicationContext, VERTICAL)
-////            addItemDecoration(divider)
-//        }
-//
-//        viewModel = ViewModelProviders.of(this).get(RsViewModel::class.java)
-//        viewModel.getAllRsObservers().observe(this, Observer {
-//            recyclerViewAdapter.setListData(ArrayList(it))
-//            recyclerViewAdapter.notifyDataSetChanged()
-//        })
+        findViewById<TextView>(R.id.lokasi).text = "$rs_kota, $rs_provinsi"
 
-//        DATABASE LAMA
         //creating the instance of DatabaseHandler class
-        val databaseHandler: DatabaseHandler= DatabaseHandler(this)
+        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<RumahSakitModelClass> = databaseHandler.viewRS("Surabaya")
-//        val empId = Array<String>(emp.size){"15"}
-//        val empRS = Array<String>(emp.size){"null"}
-//        val empAlamat = Array<String>(emp.size){"null"}
-//        var index = 0
-//        for(e in emp){
-//            empId[index] = e.rumahSakitId.toString()
-//            empRS[index] = e.rumahSakit
-//            empAlamat[index] = e.alamat
-//            index++
-//        }
+        val emp: List<RumahSakitModelClass> = databaseHandler.viewRS(rs_kota!!)
 
-        var list = mutableListOf<RsModel>()
-
-        for(e in emp){
-            list.add(RsModel(e.rumahSakitId.toString(), e.rumahSakit, e.alamat))
-        }
-
-        listView.adapter = RsListAdapter(this,R.layout.rs_list,list)
+        listView.adapter = RsListAdapter(this,R.layout.rs_list,emp)
         Log.d("CREATION", "Bikin listview")
 
         listView.setOnItemClickListener{parent, view, position, id ->
@@ -75,47 +46,11 @@ class bank_rs : AppCompatActivity(), RsViewAdapter.RowClickListener {
 
         }
 
-        //creating custom ArrayAdapter
-//        val myListAdapter = rs_list_adapter(this,empId,empRS,empAlamat)
-//
-//        val listView = findViewById<ListView>(R.id.rs_listview)
-//        listView.adapter = myListAdapter
-
-//        listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
-//            myListAdapter.getPosition() // here you will get the clicked item from
-//            //your imagelist and you can check by getting a title  by using this
-//            val title: String = imageList.get(position).getTitle()
-//            if (title == "you title to match") {
-//                //do your action or you can get a particular position and click there
-//            }
-//        })
-
-//        ArrayAdapter arrayAdapter = new ArrayAdapter
-
-//        listView.setOnClickListener(new AdapterView<?> parent, View view, int position, long id) {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position,long id)
-//        }
-
-//        listView.onItemClickListener =
-//            OnItemClickListener { parent, view, position, id ->
-//                val intent = Intent(this, bank_detail::class.java)
-//                startActivity(intent)
-//            }
-
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
             finish()
         }
 
 
-    }
-
-    override fun onRsClickListener(user: RsEntity) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onItemClickListener(user: RsEntity) {
-        TODO("Not yet implemented")
     }
 }

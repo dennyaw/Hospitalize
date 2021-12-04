@@ -11,9 +11,6 @@ import android.widget.ImageButton
 import com.example.hospitalize.databinding.ActivityBankLocationBinding
 import android.widget.Spinner
 
-
-
-
 class bank_location : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +48,6 @@ class bank_location : AppCompatActivity() {
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {
             finish()
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
         }
 
         val mySpinner = findViewById<View>(R.id.kota) as Spinner

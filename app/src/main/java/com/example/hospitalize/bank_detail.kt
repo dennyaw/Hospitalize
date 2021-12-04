@@ -1,6 +1,7 @@
 package com.example.hospitalize
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,9 +33,8 @@ class bank_detail : AppCompatActivity() {
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         //calling the viewEmployee method of DatabaseHandler class to read the records
-        val emp: List<GoldarModel> = databaseHandler.viewGoldar(rs_id.toInt())
+        var emp: List<GoldarModel> = databaseHandler.viewGoldar(rs_id.toInt())
         val empRs: List<RumahSakitModelClass> = databaseHandler.viewRSDetail(rs_id)
-
 
         // INFO RS
         var RsName = "x"
@@ -55,16 +55,13 @@ class bank_detail : AppCompatActivity() {
         findViewById<TextView>(R.id.notelp).text = RsPhone
         findViewById<TextView>(R.id.alamat).text = RsAddress
 
-
-        listView.adapter = GoldarListAdapter(this,R.layout.goldar_list,emp)
+        listView.adapter = GoldarListAdapter(this, R.layout.goldar_list, emp)
 
         listView.setOnItemClickListener{parent, view, position, id ->
             val idText = view.findViewById(R.id.goldar_id) as TextView
             val goldar_id = idText.text.toString()
             val stokText = view.findViewById(R.id.goldar_stok) as TextView
             val goldar_stok = stokText.text.toString()
-
-            Log.d("CREATION", "pencet bloodbag")
 
             // Membuat komponen alert
             val builder = AlertDialog.Builder(this)
@@ -73,6 +70,9 @@ class bank_detail : AppCompatActivity() {
 
             builder.setPositiveButton("YES") { dialog, which ->
                 databaseHandler.updateGoldar(goldar_id, goldar_stok)
+                // Load ulang db baru
+                emp = databaseHandler.viewGoldar(rs_id.toInt())
+                listView.adapter = GoldarListAdapter(this, R.layout.goldar_list, emp)
                 Toast.makeText(getApplicationContext(), "Sukses mengambil kantung darah", Toast.LENGTH_LONG).show();
             }
 
@@ -93,6 +93,12 @@ class bank_detail : AppCompatActivity() {
             intent.putExtra("x",RsX);
             intent.putExtra("y",RsY);
             startActivity(intent)
+        }
+        val telp = findViewById<ImageButton>(R.id.telp)
+        telp.setOnClickListener {
+            val dialIntent = Intent(Intent.ACTION_DIAL)
+            dialIntent.data = Uri.parse("tel: $RsPhone")
+            startActivity(dialIntent)
         }
     }
 }

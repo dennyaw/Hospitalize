@@ -45,13 +45,13 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         db?.execSQL(CREATE_RUMAH_SAKIT_TABLE)
         db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
                 + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
-                "values(1,'RSUD Bhakti Dharma Husada', 'Surabaya', '-7.254849380414793', '112.6357612344045', '123', 'Jl. Kendung No.115 - 117, Sememi, Kec. Benowo, Kota SBY, Jawa Timur 60198')");
+                "values(1,'RSUD Bhakti Dharma Husada', 'Surabaya', '-7.254849380414793', '112.6357612344045', '0812-345-256', 'Jl. Kendung No.115 - 117, Sememi, Kec. Benowo, Kota SBY, Jawa Timur 60198')");
         db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
                 + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
-                "values(2,'Rumah Sakit Bunda', 'Surabaya', '-7.251145620793517', '112.65026662144396', '345', 'Jl. Raya Kandangan No.23-24, Kandangan, Kec. Benowo, Kota SBY, Jawa Timur 60199')");
+                "values(2,'Rumah Sakit Bunda', 'Surabaya', '-7.251145620793517', '112.65026662144396', '0815-723-423', 'Jl. Raya Kandangan No.23-24, Kandangan, Kec. Benowo, Kota SBY, Jawa Timur 60199')");
         db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
                 + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
-                "values(3,'Rumah Sakit Panti Rapih', 'Yogyakarta', '-7.776140207372767', '110.37688875767313', '345', 'Jl. Cik Di Tiro No.30, Samirono, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223')");
+                "values(3,'Rumah Sakit Panti Rapih', 'Yogyakarta', '-7.776140207372767', '110.37688875767313', '0287-234-882', 'Jl. Cik Di Tiro No.30, Samirono, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223')");
 
 
         val CREATE_GOLDAR_TABLE = ("CREATE TABLE " + TABLE_GOLDAR + "("
@@ -114,11 +114,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val db = this.writableDatabase
 
         val updateQuery = "UPDATE $TABLE_GOLDAR SET $KEY_GOLDAR_STOK = " + (stok.toInt() - 1 ) +" WHERE $KEY_GOLDAR_ID = $id ;"
-//        try {
-//            db.rawQuery(updateQuery, null)
-//        } catch (e: SQLiteException) {
-//            db.execSQL(updateQuery)
-//        }
+
         val cursor = db.rawQuery(
             updateQuery,
             null

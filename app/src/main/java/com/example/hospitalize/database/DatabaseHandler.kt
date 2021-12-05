@@ -58,9 +58,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                 + KEY_GOLDAR_ID + " INTEGER PRIMARY KEY," + KEY_SUMBER_ID + " INTEGER," + KEY_GOLDAR + " TEXT,"
                 + KEY_GOLDAR_STOK + " INTEGER" + ")")
         db?.execSQL(CREATE_GOLDAR_TABLE)
-        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
+        db?.execSQL("insert into $TABLE_GOLDAR ( $KEY_GOLDAR_ID ,$KEY_SUMBER_ID ,$KEY_GOLDAR ,$KEY_GOLDAR_STOK ) " +
                 "values(1, 1, 'A', 10)");
-        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
+        db?.execSQL("insert into $TABLE_GOLDAR ( $KEY_GOLDAR_ID ,$KEY_SUMBER_ID ,$KEY_GOLDAR ,$KEY_GOLDAR_STOK ) " +
                 "values(2, 1, 'B', 5)");
         db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
                 "values(3, 1, 'AB', 9)");
@@ -83,7 +83,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     //method to read data
     fun viewGoldar(id: Int): List<GoldarModel> {
         val empList: ArrayList<GoldarModel> = ArrayList<GoldarModel>()
-        val selectQuery = "SELECT * FROM $TABLE_GOLDAR WHERE sumber_id = $id"
+        val selectQuery = "SELECT * FROM $TABLE_GOLDAR WHERE sumber_id = $id AND $KEY_GOLDAR_STOK > 0"
         val db = this.readableDatabase
         var cursor: Cursor? = null
         try {
@@ -106,19 +106,17 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 //                }
             } while (cursor.moveToNext())
         }
+        cursor.close()
         return empList
     }
 
     @SuppressLint("Recycle")
-    fun updateGoldar(id: String, stok:String): Int {
+    fun updateGoldar(id: String, stok:String) {
         val db = this.writableDatabase
 
         val updateQuery = "UPDATE $TABLE_GOLDAR SET $KEY_GOLDAR_STOK = " + (stok.toInt() - 1 ) +" WHERE $KEY_GOLDAR_ID = $id ;"
 
-        val cursor = db.rawQuery(
-            updateQuery,
-            null
-        )
+        val cursor = db.rawQuery( updateQuery,null )
         var sum = 0
         if (cursor != null) {
             try {
@@ -130,8 +128,39 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
             }
         }
 //        db.close()
-        Log.d("CREATION", "Update Query")
-        return 1
+        Log.d("CREATION", "Update Query goldar_id:$id")
+    }
+
+    fun addGoldar(rs_id: String, goldar: String) {
+        val db = this.writableDatabase
+
+        val checkQuery = "SELECT 1 FROM $TABLE_GOLDAR WHERE $KEY_SUMBER_ID = $rs_id AND $KEY_GOLDAR = '$goldar' ;"
+        val cursor: Cursor = db.rawQuery(checkQuery, null)
+        var addQuery: String
+        addQuery = "INSERT INTO $TABLE_GOLDAR ($KEY_SUMBER_ID, $KEY_GOLDAR, $KEY_GOLDAR_STOK) values($rs_id, '$goldar', 1);"
+        if (cursor.count > 0) {
+            addQuery =
+                "UPDATE $TABLE_GOLDAR SET $KEY_GOLDAR_STOK = $KEY_GOLDAR_STOK + 1 WHERE $KEY_SUMBER_ID = $rs_id AND $KEY_GOLDAR = '$goldar' ;"
+        }
+
+        val cursor2: Cursor = db.rawQuery(addQuery, null)
+        val count = cursor.count
+
+        var sum = 0
+        if (cursor2 != null) {
+            try {
+                if (cursor2.moveToFirst()) {
+                    sum = cursor2.getInt(0)
+                }
+            } finally {
+                cursor2.close()
+            }
+        }
+
+        Log.d("CREATION", "Add Query rs:$rs_id goldar:$goldar isExist:$count")
+        Log.d("CREATION", "Query: $addQuery")
+//        cursor2.close()
+        cursor.close()
     }
 
     fun viewRS(region: String): List<RumahSakitModelClass> {
@@ -166,6 +195,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                     empList.add(emp)
             } while (cursor.moveToNext())
         }
+        cursor.close()
         return empList
     }
 
@@ -204,6 +234,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                 empList.add(emp)
             } while (cursor.moveToNext())
         }
+        cursor.close()
         return empList
     }
 }

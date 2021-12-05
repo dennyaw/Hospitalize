@@ -6,11 +6,15 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.hospitalize.adapter.GoldarListAdapter
 import com.example.hospitalize.database.DatabaseHandler
 import com.example.hospitalize.model.RumahSakitModelClass
+import android.view.View
+import android.widget.RadioGroup
 
 class donor_form : AppCompatActivity() {
+
+    private var radioButton: RadioGroup? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donor_form)
@@ -33,21 +37,41 @@ class donor_form : AppCompatActivity() {
         findViewById<TextView>(R.id.rs_name).text = RsName
         findViewById<TextView>(R.id.lokasi).text = RsCity
 
+        val rg = findViewById<View>(R.id.goldar_radio) as RadioGroup
+        var goldar = "A"
+        var checked = false
+
+        rg.setOnCheckedChangeListener { group, checkedId ->
+            checked = true
+            when (checkedId) {
+                R.id.A -> { goldar = "A" }
+                R.id.B -> { goldar = "B" }
+                R.id.AB -> { goldar = "AB" }
+                R.id.O -> { goldar = "O" }
+            }
+        }
+
         val submit = findViewById<ImageButton>(R.id.donorButton)
         submit.setOnClickListener {
-            // Membuat komponen alert
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Konfirmasi")
-            builder.setMessage("Apakah kamu yakin data yang dimasukkan sudah benar?")
+            if(checked) {
+                // Membuat komponen alert
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Konfirmasi")
+                builder.setMessage("Apakah kamu yakin data yang dimasukkan sudah benar?")
 
-            builder.setPositiveButton("YES") { dialog, which ->
-//                databaseHandler.updateGoldar(goldar_id, goldar_stok)
-                Toast.makeText(getApplicationContext(), "Sukses melakukan donor", Toast.LENGTH_LONG).show();
+                builder.setPositiveButton("YES") { dialog, which ->
+                    databaseHandler.addGoldar(rs_id, goldar)
+                    Toast.makeText(getApplicationContext(), "Sukses melakukan donor", Toast.LENGTH_LONG).show();
+                }
+
+                builder.setNegativeButton("NO") { dialog, which -> }
+
+                builder.show()
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Lengkapi data terlebih dahulu!", Toast.LENGTH_LONG).show();
             }
 
-            builder.setNegativeButton("NO") { dialog, which -> }
-
-            builder.show()
         }
         val balik = findViewById<ImageButton>(R.id.balik)
         balik.setOnClickListener {

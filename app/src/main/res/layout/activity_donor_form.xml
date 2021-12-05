@@ -184,46 +184,41 @@
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/alamat" />
 
-            <LinearLayout
-                android:id="@id/radiogroup"
+            <RadioGroup
+                android:id="@+id/goldar_radio"
                 android:layout_width="match_parent"
-                android:layout_height="49dp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/goldar"
-                app:layout_constraintTop_toBottomOf="@+id/goldar">
+                app:layout_constraintTop_toBottomOf="@+id/goldar"
+                android:orientation="horizontal"
+                >
 
-                <RadioGroup
+                <RadioButton
+                    android:id="@+id/O"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="O" />
 
-                    <RadioButton
-                        android:id="@+id/O"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="O" />
+                <RadioButton
+                    android:id="@+id/A"
+                    android:layout_width="50dp"
+                    android:layout_height="48dp"
+                    android:text="A"
+                    tools:ignore="DuplicateClickableBoundsCheck" />
 
-                    <RadioButton
-                        android:id="@+id/A"
-                        android:layout_width="50dp"
-                        android:layout_height="48dp"
-                        android:text="A"
-                        tools:ignore="DuplicateClickableBoundsCheck" />
+                <RadioButton
+                    android:id="@+id/B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B"
+                    tools:ignore="DuplicateClickableBoundsCheck" />
 
-                    <RadioButton
-                        android:id="@+id/B"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="B"
-                        tools:ignore="DuplicateClickableBoundsCheck" />
-
-                    <RadioButton
-                        android:id="@+id/AB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="AB" />
-                </RadioGroup>
-            </LinearLayout>
+                <RadioButton
+                    android:id="@+id/AB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AB" />
+            </RadioGroup>
 
             <ImageButton
                 android:id="@+id/donorButton"
@@ -231,7 +226,7 @@
                 android:layout_height="72dp"
                 android:layout_marginBottom="16dp"
                 android:background="@null"
-                app:layout_constraintTop_toBottomOf="@+id/radiogroup"
+                app:layout_constraintTop_toBottomOf="@+id/goldar_radio"
                 app:srcCompat="@drawable/donor"
                 tools:ignore="SpeakableTextPresentCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>

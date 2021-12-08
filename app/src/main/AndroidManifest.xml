@@ -14,18 +14,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hospitalize">
         <activity
-            android:name=".listview.goldar_list"
-            android:exported="true" />
-        <activity
-            android:name=".listview.goldar_list"
-            android:exported="true" />
+            android:name=".akun"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
 
         <activity
+            android:name=".listview.goldar_list"
+            android:exported="true" />
+        <activity
             android:name=".bank_detail"
+            android:exported="true" />
+        <activity
+            android:name=".login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".register"
             android:exported="true" />
         <activity
             android:name=".donor_form"
@@ -47,13 +59,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
 
         <uses-library
             android:name="org.apache.http.legacy"

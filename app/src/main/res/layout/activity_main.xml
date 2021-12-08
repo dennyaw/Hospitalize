@@ -31,7 +31,7 @@
     <TextView
         android:id="@+id/box"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="420dp"
         android:layout_marginTop="320dp"
         android:background="@drawable/boxputih"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,27 +55,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:columnCount="2"
-        android:rowCount="1"
+        android:rowCount="2"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/layanan">
+        app:layout_constraintTop_toBottomOf="@+id/layanan">
 
         <ImageButton
             android:id="@+id/bankdarah"
             android:layout_width="174dp"
             android:layout_height="148dp"
-            android:layout_marginTop="64dp"
             android:background="@null"
             app:srcCompat="@drawable/bankdarah"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
+
             android:id="@+id/donordarah"
             android:layout_width="174dp"
             android:layout_height="148dp"
-            android:layout_marginTop="64dp"
             android:background="@null"
             app:srcCompat="@drawable/donordarah"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/wikidonor"
+            android:layout_width="174dp"
+            android:layout_height="148dp"
+            android:background="@null"
+            app:srcCompat="@drawable/wikidonor"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/akun"
+            android:layout_width="174dp"
+            android:layout_height="148dp"
+            android:background="@null"
+            app:srcCompat="@drawable/akun"
             tools:ignore="SpeakableTextPresentCheck" />
     </GridLayout>
 

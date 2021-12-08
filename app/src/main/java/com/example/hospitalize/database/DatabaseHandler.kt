@@ -17,7 +17,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     DATABASE_VERSION
 ) {
     companion object {
-        private val DATABASE_VERSION = 3
+        private val DATABASE_VERSION = 4
         private val DATABASE_NAME = "GoldarDatabase"
 
         private val TABLE_RUMAH_SAKIT = "RumahSakitTable"
@@ -34,44 +34,38 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val KEY_SUMBER_ID = "sumber_id"
         private val KEY_GOLDAR = "goldar"
         private val KEY_GOLDAR_STOK = "stok"
+
+        private val TABLE_ACCOUNT = "AccountTable"
+        private val KEY_ACCOUNT_ID = "account_id"
+        private val KEY_UNAME = "username"
+        private val KEY_PASSWORD = "password"
+        private val KEY_NAME = "nama"
+        private val KEY_LOGGED_IN = "logged_in"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
 
         // creating table with fields
-        val CREATE_RUMAH_SAKIT_TABLE = ("CREATE TABLE " + TABLE_RUMAH_SAKIT + "("
-                + KEY_RUMAH_SAKIT_ID + " INTEGER PRIMARY KEY," + KEY_RUMAH_SAKIT + " TEXT," + KEY_REGION + " TEXT," + KEY_SUMBU_X + " TEXT,"
-                + KEY_SUMBU_Y + " TEXT,"+ KEY_TELEPON + " TEXT," + KEY_ALAMAT + " TEXT)")
+        val CREATE_RUMAH_SAKIT_TABLE = ("CREATE TABLE $TABLE_RUMAH_SAKIT($KEY_RUMAH_SAKIT_ID INTEGER PRIMARY KEY, $KEY_RUMAH_SAKIT TEXT, $KEY_REGION TEXT, $KEY_SUMBU_X TEXT, $KEY_SUMBU_Y TEXT, $KEY_TELEPON TEXT,$KEY_ALAMAT TEXT)")
+        val insertRs = "insert into $TABLE_RUMAH_SAKIT($KEY_RUMAH_SAKIT_ID,$KEY_RUMAH_SAKIT,$KEY_REGION,$KEY_SUMBU_X,$KEY_SUMBU_Y,$KEY_TELEPON,$KEY_ALAMAT)"
         db?.execSQL(CREATE_RUMAH_SAKIT_TABLE)
-        db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
-                + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
-                "values(1,'RSUD Bhakti Dharma Husada', 'Surabaya', '-7.254849380414793', '112.6357612344045', '0812-345-256', 'Jl. Kendung No.115 - 117, Sememi, Kec. Benowo, Kota SBY, Jawa Timur 60198')");
-        db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
-                + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
-                "values(2,'Rumah Sakit Bunda', 'Surabaya', '-7.251145620793517', '112.65026662144396', '0815-723-423', 'Jl. Raya Kandangan No.23-24, Kandangan, Kec. Benowo, Kota SBY, Jawa Timur 60199')");
-        db?.execSQL("insert into " + TABLE_RUMAH_SAKIT + "(" + KEY_RUMAH_SAKIT_ID + "," + KEY_RUMAH_SAKIT + "," + KEY_REGION + "," + KEY_SUMBU_X + ","
-                + KEY_SUMBU_Y + "," + KEY_TELEPON + "," + KEY_ALAMAT + ") " +
-                "values(3,'Rumah Sakit Panti Rapih', 'Yogyakarta', '-7.776140207372767', '110.37688875767313', '0287-234-882', 'Jl. Cik Di Tiro No.30, Samirono, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223')");
+        db?.execSQL(insertRs + "values(1,'RSUD Bhakti Dharma Husada', 'Surabaya', '-7.254849380414793', '112.6357612344045', '0812-345-256', 'Jl. Kendung No.115 - 117, Sememi, Kec. Benowo, Kota SBY, Jawa Timur 60198')");
+        db?.execSQL(insertRs + "values(2,'Rumah Sakit Bunda', 'Surabaya', '-7.251145620793517', '112.65026662144396', '0815-723-423', 'Jl. Raya Kandangan No.23-24, Kandangan, Kec. Benowo, Kota SBY, Jawa Timur 60199')");
+        db?.execSQL(insertRs + "values(3,'Rumah Sakit Panti Rapih', 'Yogyakarta', '-7.776140207372767', '110.37688875767313', '0287-234-882', 'Jl. Cik Di Tiro No.30, Samirono, Terban, Kec. Gondokusuman, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55223')");
 
-
-        val CREATE_GOLDAR_TABLE = ("CREATE TABLE " + TABLE_GOLDAR + "("
-                + KEY_GOLDAR_ID + " INTEGER PRIMARY KEY," + KEY_SUMBER_ID + " INTEGER," + KEY_GOLDAR + " TEXT,"
-                + KEY_GOLDAR_STOK + " INTEGER" + ")")
+        val CREATE_GOLDAR_TABLE = ("CREATE TABLE $TABLE_GOLDAR($KEY_GOLDAR_ID INTEGER PRIMARY KEY,$KEY_SUMBER_ID INTEGER,$KEY_GOLDAR TEXT,$KEY_GOLDAR_STOK INTEGER)")
+        val insertGoldar = "insert into $TABLE_GOLDAR ( $KEY_GOLDAR_ID ,$KEY_SUMBER_ID ,$KEY_GOLDAR ,$KEY_GOLDAR_STOK ) "
         db?.execSQL(CREATE_GOLDAR_TABLE)
-        db?.execSQL("insert into $TABLE_GOLDAR ( $KEY_GOLDAR_ID ,$KEY_SUMBER_ID ,$KEY_GOLDAR ,$KEY_GOLDAR_STOK ) " +
-                "values(1, 1, 'A', 10)");
-        db?.execSQL("insert into $TABLE_GOLDAR ( $KEY_GOLDAR_ID ,$KEY_SUMBER_ID ,$KEY_GOLDAR ,$KEY_GOLDAR_STOK ) " +
-                "values(2, 1, 'B', 5)");
-        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
-                "values(3, 1, 'AB', 9)");
-        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
-                "values(4, 1, 'O', 18)");
-        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
-                "values(5, 2, 'A', 4)");
-        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
-                "values(6, 3, 'AB', 9)");
-        db?.execSQL("insert into " + TABLE_GOLDAR + "(" + KEY_GOLDAR_ID + "," + KEY_SUMBER_ID + "," + KEY_GOLDAR + "," + KEY_GOLDAR_STOK + ") " +
-                "values(7, 3, 'O', 18)");
+        db?.execSQL(insertGoldar + "values(1, 1, 'A', 10)");
+        db?.execSQL(insertGoldar + "values(2, 1, 'B', 5)");
+        db?.execSQL(insertGoldar + "values(3, 1, 'AB', 9)");
+        db?.execSQL(insertGoldar + "values(4, 1, 'O', 18)");
+        db?.execSQL(insertGoldar + "values(5, 2, 'A', 4)");
+        db?.execSQL(insertGoldar + "values(6, 3, 'AB', 9)");
+        db?.execSQL(insertGoldar + "values(7, 3, 'O', 18)");
+
+        val CREATE_ACCOUNT_TABLE = ("CREATE TABLE $TABLE_ACCOUNT($KEY_ACCOUNT_ID INTEGER PRIMARY KEY, $KEY_UNAME TEXT, $KEY_PASSWORD TEXT, $KEY_NAME TEXT, $KEY_LOGGED_IN INTEGER)")
+        db?.execSQL(CREATE_ACCOUNT_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -80,7 +74,115 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         onCreate(db)
     }
 
-    //method to read data
+    // Create akun
+    fun createAccount(uname: String, pass: String, name: String): Boolean {
+        val db = this.writableDatabase
+        val getQuery = "SELECT * FROM $TABLE_ACCOUNT WHERE $KEY_UNAME = '$uname';"
+        val cursorCheck: Cursor = db.rawQuery(getQuery, null)
+        val res: Int
+        if (cursorCheck.count > 0) {
+            Log.d("CREATION", "Failed create account, uname:$uname used")
+            cursorCheck.close()
+            db.close()
+            return false
+        } else {
+            val addQuery = "INSERT INTO $TABLE_ACCOUNT($KEY_UNAME, $KEY_PASSWORD, $KEY_NAME, $KEY_LOGGED_IN) values('$uname', '$pass', '$name', -1);"
+            val cursor: Cursor = db.rawQuery(addQuery, null)
+
+            Log.d("CREATION", "Create account, name:$name, uname:$uname, pass:$pass")
+            Log.d("CREATION", addQuery)
+            Log.d("CREATION", getQuery)
+            cursorCheck.close()
+            try {
+                if (cursor.moveToFirst()) {
+                }
+            } finally {
+                cursor.close()
+            }
+            db.close()
+            return true
+        }
+    }
+
+    // Login akun
+    fun loginAccount(uname: String, pass: String): Boolean {
+        val db = this.writableDatabase
+
+        val getQuery = "SELECT * FROM $TABLE_ACCOUNT WHERE $KEY_UNAME = '$uname';"
+        val cursor: Cursor = db.rawQuery(getQuery, null)
+        var res = true
+        if (cursor.count > 0) {
+            val updateQuery = "UPDATE $TABLE_ACCOUNT SET $KEY_LOGGED_IN = 1 WHERE $KEY_UNAME = '$uname' ;"
+            val cursor2 = db.rawQuery( updateQuery,null )
+            try {
+                if (cursor2.moveToFirst()) {
+                }
+            } finally {
+                cursor2.close()
+            }
+        } else {
+            res = false
+        }
+
+        Log.d("CREATION", "Login account, uname:$uname, pass:$pass")
+        cursor.close()
+        db.close()
+        return res
+    }
+
+    // Logout akun
+    fun logoutAccount(id: Int): Boolean {
+        val db = this.writableDatabase
+
+        val getQuery = "SELECT * FROM $TABLE_ACCOUNT WHERE $KEY_ACCOUNT_ID = $id;"
+        val cursor: Cursor = db.rawQuery(getQuery, null)
+        var res = true
+        if (cursor.count > 0) {
+            val updateQuery = "UPDATE $TABLE_ACCOUNT SET $KEY_LOGGED_IN = -1 WHERE $KEY_ACCOUNT_ID = $id ;"
+            val cursor2 = db.rawQuery( updateQuery,null )
+            try {
+                if (cursor2.moveToFirst()) {
+                }
+            } finally {
+                cursor2.close()
+            }
+        } else {
+            res = false
+        }
+
+        Log.d("CREATION", "Logout account, id:$id")
+        try {
+            if (cursor.moveToFirst()) {
+            }
+        } finally {
+            cursor.close()
+        }
+        db.close()
+        return res
+    }
+
+    // Check is logged in
+    fun checkAccount(): Int {
+        val db = this.writableDatabase
+
+        val checkQuery = "SELECT * FROM $TABLE_ACCOUNT WHERE $KEY_LOGGED_IN = 1 LIMIT 1;"
+        val cursor: Cursor = db.rawQuery(checkQuery, null)
+        var loggedAccount = -1
+        if (cursor.count > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    loggedAccount = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ACCOUNT_ID))
+//                }
+                } while (cursor.moveToNext())
+            }
+        }
+        Log.d("CREATION", "Account logged id:$loggedAccount")
+        cursor.close()
+        db.close()
+        return loggedAccount
+    }
+
+    // GET list kantong darah tersedia
     fun viewGoldar(id: Int): List<GoldarModel> {
         val empList: ArrayList<GoldarModel> = ArrayList<GoldarModel>()
         val selectQuery = "SELECT * FROM $TABLE_GOLDAR WHERE sumber_id = $id AND $KEY_GOLDAR_STOK > 0"
@@ -106,11 +208,13 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 //                }
             } while (cursor.moveToNext())
         }
+        db.close()
         cursor.close()
         return empList
     }
 
     @SuppressLint("Recycle")
+    // Mengambil kantong darah
     fun updateGoldar(id: String, stok:String) {
         val db = this.writableDatabase
 
@@ -127,10 +231,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
                 cursor.close()
             }
         }
-//        db.close()
+        db.close()
         Log.d("CREATION", "Update Query goldar_id:$id")
     }
 
+    // Mendonor kantong darah
     fun addGoldar(rs_id: String, goldar: String) {
         val db = this.writableDatabase
 
@@ -161,8 +266,10 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         Log.d("CREATION", "Query: $addQuery")
 //        cursor2.close()
         cursor.close()
+        db.close()
     }
 
+    // GET list rumah sakit
     fun viewRS(region: String): List<RumahSakitModelClass> {
         val empList: ArrayList<RumahSakitModelClass> = ArrayList<RumahSakitModelClass>()
         val selectQuery = "SELECT * FROM $TABLE_RUMAH_SAKIT WHERE region = '$region' "
@@ -196,9 +303,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
             } while (cursor.moveToNext())
         }
         cursor.close()
+        db.close()
         return empList
     }
 
+    // GET info salah satu rumah sakit
     fun viewRSDetail(id: String): List<RumahSakitModelClass> {
 
         val empList: ArrayList<RumahSakitModelClass> = ArrayList<RumahSakitModelClass>()
@@ -235,6 +344,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
             } while (cursor.moveToNext())
         }
         cursor.close()
+        db.close()
         return empList
     }
 }

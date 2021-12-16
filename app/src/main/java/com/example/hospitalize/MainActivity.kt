@@ -34,6 +34,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val wikiBtn = findViewById<ImageButton>(R.id.wikidonor)
+        wikiBtn.setOnClickListener {
+            val intent = Intent(this, gallery::class.java)
+            intent.putExtra("akun_id", akun_id);
+            startActivity(intent)
+        }
+
     }
     override fun onBackPressed() {
         val a = Intent(Intent.ACTION_MAIN)

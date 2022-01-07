@@ -108,6 +108,8 @@
                 android:padding="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:inputType="text"
+                android:maxLines="1"
                 android:background="@drawable/boxabu"
                 app:layout_constraintTop_toBottomOf="@+id/nama"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -130,6 +132,8 @@
                 android:layout_height="48dp"
                 android:background="@drawable/boxabu"
                 android:paddingLeft="10dp"
+                android:inputType="text"
+                android:maxLines="1"
                 app:layout_constraintTop_toBottomOf="@+id/nik"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -149,6 +153,8 @@
                 android:padding="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:inputType="phone"
+                android:maxLines="1"
                 android:background="@drawable/boxabu"
                 app:layout_constraintTop_toBottomOf="@+id/hp"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -169,6 +175,7 @@
                 android:padding="14dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:inputType="text"
                 android:background="@drawable/boxabu"
                 app:layout_constraintTop_toBottomOf="@+id/alamat"
                 tools:ignore="SpeakableTextPresentCheck" />

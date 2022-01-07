@@ -4,11 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageButton
+import android.widget.*
 import com.example.hospitalize.databinding.ActivityBankLocationBinding
-import android.widget.Spinner
 
 class donor_location : AppCompatActivity() {
 
@@ -18,6 +15,8 @@ class donor_location : AppCompatActivity() {
 
         val binding = ActivityBankLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        findViewById<TextView>(R.id.BankDarah).text = "Donor Darah"
 
         val arrayList_parent = arrayListOf<String>("DIY", "Jawa Timur")
         val arrayAdapter_parent = ArrayAdapter(applicationContext, R.layout.spinner_text, arrayList_parent)

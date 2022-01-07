@@ -27,6 +27,7 @@ class donor_rs : AppCompatActivity() {
         rs_provinsi = extras?.getString("province")
 
         findViewById<TextView>(R.id.lokasi).text = "$rs_kota, $rs_provinsi"
+        findViewById<TextView>(R.id.BankDarah).text = "Donor Darah"
 
         //creating the instance of DatabaseHandler class
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)

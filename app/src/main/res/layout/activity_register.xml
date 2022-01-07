@@ -61,6 +61,8 @@ main
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:padding="14dp"
+            android:inputType="text"
+            android:maxLines="1"
             android:layout_marginBottom="12dp"
             android:background="@drawable/boxabu"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -79,6 +81,7 @@ main
             android:inputType="textPassword"
             android:layout_height="48dp"
             android:layout_marginBottom="12dp"
+            android:maxLines="1"
             android:padding="14dp"
             android:background="@drawable/boxabu"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -96,6 +99,8 @@ main
             android:layout_height="48dp"
             android:background="@drawable/boxabu"
             android:layout_marginBottom="12dp"
+            android:inputType="text"
+            android:maxLines="1"
             android:padding="14dp"
             tools:ignore="SpeakableTextPresentCheck" />
 
